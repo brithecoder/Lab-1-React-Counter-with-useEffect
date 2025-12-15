@@ -8,6 +8,7 @@ import StepValue from './Components/StepValue';
 export interface stepValueProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   currentStep: number;
+  setStep: (value: number) => void;
 }
 export interface counterProps {
   count: number;
@@ -116,23 +117,28 @@ const reset = useCallback(() => {
     setStepValue(isNaN(newStepValue) ? 1 : newStepValue);
   };  
 
+  const setStepValueDirectly = useCallback((value: number) => {
+    // Ensure the value is valid (at least 1)
+    const newValue = Math.max(1, value);
+    setStepValue(newValue);
+}, [setStepValue]);
 
   //This code works perfectly fine but commenting out becuase  while trying to demo keyboard events it interferes with input field focus for step value.
 
   // Keyboard event handlers for incrementing and decrementing the counter
-  //     useEffect(() => {
-  //         const handleKeyDown = (event: KeyboardEvent) => {
-  //     if (event.key === "ArrowUp") {
-  //       increment(); 
-  //     } else if (event.key === "ArrowDown") {
-  //       decrement(); 
-  //     }
-  //   };
-  //   document.addEventListener('keydown', handleKeyDown);
-  //  return () => {
-  //     document.removeEventListener('keydown', handleKeyDown);
-  //   };
-  // }, [increment, decrement]);
+      useEffect(() => {
+          const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowUp") {
+        increment(); 
+      } else if (event.key === "ArrowDown") {
+        decrement(); 
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+   return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [increment, decrement]);
 
   return (
     <div className="App"> 
@@ -142,9 +148,10 @@ const reset = useCallback(() => {
         decrement={decrement}
         reset={reset} />
         
-        <StepValue 
-        handleChange={handleStepChange}
-        currentStep={stepValue} />
+       <StepValue 
+         handleChange={handleStepChange} 
+          currentStep={stepValue} 
+         setStep={setStepValueDirectly} />
 
         {saveMessage && (
         <p 
@@ -164,9 +171,9 @@ const reset = useCallback(() => {
           Previous counts: 👉{countHistory.join(', ')}👈
         </p>
       </div>
-      {/* <p style={{ marginTop: '30px', fontSize: '12px', color: '#888' }}>
+      <p style={{ marginTop: '30px', fontSize: '12px', color: '#888' }}>
         (Use Arrow Up and Arrow Down keys to increment and decrement the counter)
-      </p> */}
+      </p>
 
     </div>
   )
