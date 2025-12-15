@@ -65,15 +65,8 @@ function App() {
         }
       };
   } , [count, countHistory, stepValue]); // Trigger effect on count or stepValue change
-      // 4. Clear the message after a short duration (e.g., 2 seconds)
-   
- 
-
-
-
-
-
-
+      
+  
 
   // Use useCallback to memoize these functions, optimizing performance when passed to children
 const increment = useCallback(() => {
@@ -123,20 +116,23 @@ const reset = useCallback(() => {
     setStepValue(isNaN(newStepValue) ? 1 : newStepValue);
   };  
 
+
+  //This code works perfectly fine but commenting out becuase it while trying to demo keyboard events it interferes with input field focus for step value.
+
   // Keyboard event handlers for incrementing and decrementing the counter
-      useEffect(() => {
-          const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowUp") {
-        increment(); 
-      } else if (event.key === "ArrowDown") {
-        decrement(); 
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-   return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [increment, decrement]);
+  //     useEffect(() => {
+  //         const handleKeyDown = (event: KeyboardEvent) => {
+  //     if (event.key === "ArrowUp") {
+  //       increment(); 
+  //     } else if (event.key === "ArrowDown") {
+  //       decrement(); 
+  //     }
+  //   };
+  //   document.addEventListener('keydown', handleKeyDown);
+  //  return () => {
+  //     document.removeEventListener('keydown', handleKeyDown);
+  //   };
+  // }, [increment, decrement]);
 
   return (
     <div className="App"> 
