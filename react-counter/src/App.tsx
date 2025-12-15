@@ -117,7 +117,7 @@ const reset = useCallback(() => {
   };  
 
 
-  //This code works perfectly fine but commenting out becuase it while trying to demo keyboard events it interferes with input field focus for step value.
+  //This code works perfectly fine but commenting out becuase  while trying to demo keyboard events it interferes with input field focus for step value.
 
   // Keyboard event handlers for incrementing and decrementing the counter
   //     useEffect(() => {
@@ -164,9 +164,9 @@ const reset = useCallback(() => {
           Previous counts: 👉{countHistory.join(', ')}👈
         </p>
       </div>
-      <p style={{ marginTop: '30px', fontSize: '12px', color: '#888' }}>
+      {/* <p style={{ marginTop: '30px', fontSize: '12px', color: '#888' }}>
         (Use Arrow Up and Arrow Down keys to increment and decrement the counter)
-      </p>
+      </p> */}
 
     </div>
   )
